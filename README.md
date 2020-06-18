@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project is for Sadie to show off all of teh critters she has visit her in her back yard. 
+Started June 18th 2020.
 ## Available Scripts
 
 In the project directory, you can run:
