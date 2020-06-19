@@ -9,7 +9,8 @@ import '../css/range.css'
 import '../css/App.css'
 
 import { version } from '../../package.json'
-import ReactPlayer from '../index'
+import ReactPlayer from "react-player";
+// import ReactPlayer from '../index'
 import Duration from '../Duration'
 
 const MULTIPLE_SOURCES = [
