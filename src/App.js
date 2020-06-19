@@ -5,6 +5,7 @@ import Home from './components/Home'
 import About from './components/About'
 import Critters from './components/Critters'
 import Post from './components/Post'
+import Videoplayer from './components/Videoplayer'
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route exact path='/' component={Home}/>
+            <Route exact path='/' component={Videoplayer}/>
+            {/* <Route exact path='/' component={Home}/> */}
             <Route path='/about' component={About} />
             <Route path='/critters' component={Critters} />
             <Route path='/:post_id' component={Post} />
