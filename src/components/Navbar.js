@@ -5,11 +5,11 @@ const Navbar = (props) => {
   return (
     <nav className="nav-wrapper red darken-3">
       <div className="container">
-        <Link className="brand-logo" to="/">Poke' Times</Link>
+        <Link className="brand-logo" to="/">Sadie's Friends and Critters</Link>
         <ul className="right">
           <li><NavLink exact to="/">Home</NavLink></li>
           <li><NavLink to='/about'>About</NavLink></li>
-          <li><NavLink to='/contact'>Contact</NavLink></li>
+          <li><NavLink to='/critters'>Critters</NavLink></li>
         </ul>
       </div>
     </nav> 
