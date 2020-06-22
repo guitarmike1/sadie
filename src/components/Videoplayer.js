@@ -165,7 +165,8 @@ class Videoplayer extends Component {
               className='react-player'
               width='100%'
               height='100%'
-              url={url}
+              // url={url}
+              url = 'videos/sadieJoeySnow.mp4'
               pip={pip}
               playing={playing}
               controls={controls}
@@ -274,7 +275,10 @@ class Videoplayer extends Component {
           </table>
         </section>
         <section className='section'>
-          <table>
+
+
+          {/* This section has hooks for playing videos from apps like YouTube etc */}
+          {/* <table>
             <tbody>
               <tr>
                 <th>YouTube</th>
@@ -368,7 +372,8 @@ class Videoplayer extends Component {
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
+          
 
           <h2>State</h2>
 
