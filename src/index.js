@@ -17,6 +17,7 @@ const fallback = players[players.length - 1]
 
 
 const store = createStore(rootReducer);
+console.log('index - state',store.getState())
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
