@@ -1,22 +1,27 @@
 import React from "react";
 import { Column, Table } from "react-virtualized";
+import { connect } from 'react-redux'
+
 // import Draggable from "react-draggable";
 
 const TOTAL_WIDTH = 500;
 
-export default class DemoTable extends React.Component {
+class VideoTable extends React.Component {
   state = {
     widths: {
-      name: 0.33,
-      location: 0.33,
-      description: 0.33
+      name: 0.5,
+      location: 0.5
+      // description: 0.33
     }
   };
 
   render() {
+    console.log('Table.js props = ',this.props)
     // console.log('TAble list = ',list)
+    // const { list } = list;
     const { list } = this.props;
     const { widths } = this.state;
+    console.log('Table.js widths = ',widths)
 
     return (
       <Table
@@ -33,17 +38,17 @@ export default class DemoTable extends React.Component {
           label="Name"
           width={widths.name * TOTAL_WIDTH}
         />
-        <Column
+        {/* <Column
           headerRenderer={this.headerRenderer}
           dataKey="location"
           label="Location"
           width={widths.location * TOTAL_WIDTH}
-        />
-        <Column
+        /> */}
+        {/* <Column
           dataKey="description"
           label="Description"
           width={widths.description * TOTAL_WIDTH}
-        />
+        /> */}
       </Table>
     );
   }
@@ -97,3 +102,11 @@ export default class DemoTable extends React.Component {
       };
     });
 }
+
+const mapStateToProps = (state) => {
+  return {
+    list: state.list
+  }
+}
+
+export default connect(mapStateToProps)(VideoTable)
