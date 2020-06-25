@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 const TOTAL_WIDTH = 500;
 
 class VideoTable extends React.Component {
+
   state = {
     widths: {
       name: 0.5,
@@ -24,6 +25,7 @@ class VideoTable extends React.Component {
     console.log('Table.js widths = ',widths)
 
     return (
+    
       <Table
         width={TOTAL_WIDTH}
         height={300}
@@ -31,7 +33,9 @@ class VideoTable extends React.Component {
         rowHeight={30}
         rowCount={list.length}
         rowGetter={({ index }) => list[index]}
+        onRowClick={this.logArgs}
       >
+      
         <Column
           headerRenderer={this.headerRenderer}
           dataKey="name"
@@ -53,6 +57,15 @@ class VideoTable extends React.Component {
     );
   }
 
+
+  logArgs(event,index){
+    console.log( 'here is the event:',event,
+                 'the index:',index,
+                //  'the object:',this.state.bpTableData[index]
+    );
+  }
+
+  
   headerRenderer = ({
     columnData,
     dataKey,
