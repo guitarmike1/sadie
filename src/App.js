@@ -6,6 +6,7 @@ import About from './components/About'
 import Critters from './components/Critters'
 import Post from './components/Post'
 import Videoplayer from './components/Videoplayer'
+import Videos from './components/Videos'
 
 import ReactDOM from "react-dom";
 import "./css/styles.css"; // only needs to be imported once
@@ -23,6 +24,7 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
+            <Route exact path='/' component={Videos}/>
             {/* <Route exact path='/' component={VideoTable} /> */}
             <Route exact path='/' component={Videoplayer}/>
             {/* <Route exact path='/' component={Home}/> */}
