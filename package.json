@@ -10,7 +10,9 @@
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "fs": "0.0.1-security",
     "nodemon": "^2.0.4",
+    "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
@@ -26,7 +28,7 @@
     "start": "react-scripts start",
     "server": "nodemon server.js",
     "client": "npm start ",
-    "dev":    "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
