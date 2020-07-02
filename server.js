@@ -12,20 +12,23 @@ const fs = require('fs');
 const directoryPath = path.join(__dirname, 'src/serverSide/videos');
 console.log("directory path = ",directoryPath)
 //passsing directoryPath and callback function
-fs.readdir(directoryPath, function (err, files) {
-    // handling error
-    
-    
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    //listing all files using forEach
-    files.forEach(function (file) {
-        // Do whatever you want to do with the file
-        console.log(file); 
-    });
-});
-// ******************************************************
+
+
+fs.readdir(directoryPath, function(err, files){
+  files = files.map(function (fileName) {
+    return {
+      name: fileName,
+      time: fs.statSync(directoryPath + '/' + fileName).mtime.getTime()
+    };
+  })
+  .sort(function (a, b) {
+    return a.time - b.time; })
+  .map(function (v) {
+    return v.name; });
+console.log(files)
+
+});  
+
 
 app.get('/api/videos',(req, res) => {
     const videos = [
