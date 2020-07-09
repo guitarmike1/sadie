@@ -9,7 +9,12 @@ class Videos extends Component {
     }
 
     componentDidMount() {
-        fetch('api/videos')
+        fetch('api/videos', {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Orign':'*'
+            }
+        })
         .then(res => res.json())
         .then(videos => this.setState({videos}, () => console.log('videos fetch..', videos)));
     }

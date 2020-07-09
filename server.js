@@ -11,13 +11,7 @@ const fs = require('fs');
 //joining path of directory 
 const directoryPath = path.join(__dirname, 'src/serverSide/videos');
 
-//passsing directoryPath and callback function
-var sayBye = function(){
-    console.log("bye");
-};
-
-// sayBye();
-var readVideos = function(){
+app.get('/api/videos',(req, res) => {
     fs.readdir(directoryPath, function(err, files){
     files = files.map(function (fileName) {
         return {
@@ -26,31 +20,27 @@ var readVideos = function(){
         date: Date(fs.statSync(directoryPath + '/' + fileName).mtime.getTime())
         //   date: new Date(time)
         };
+
     })
     //   .sort(function (a, b) {
     //     return a.time - b.time; })
     //   .map(function (v) {
     //     return v.name; });
-    console.log(files)
-    return (JSON.stringify(files))
+    console.log("files",files)
+    res.json(files)
     });  
+});  
 
-};
+// Example app.get 
+// app.get('/api/videos',(req, res) => {
+//     const videos = [
+//         {id: 1, name: 'Joey and Sadie', date:   '4/1/2020'},
+//         {id: 2, name: 'Joey and Sadie2', date:   '4/2/2020'},
+//         {id: 3, name: 'Joey and Sadie3', date:   '4/3/2020'}
+//     ];
 
-var result = readVideos()
-console.log("readVideos",result);
-
-console.log("directory path = ",directoryPath)
-
-app.get('/api/videos',(req, res) => {
-    const videos = [
-        {id: 1, name: 'Joey and Sadie', date:   '4/1/2020'},
-        {id: 2, name: 'Joey and Sadie2', date:   '4/2/2020'},
-        {id: 3, name: 'Joey and Sadie3', date:   '4/3/2020'}
-    ];
-
-    res.json(videos);
-});
+//     res.json(videos);
+// });
 
 const port = 5000;
 console.log("mike **************8")
