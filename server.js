@@ -8,39 +8,48 @@ var myjson = []
 //requiring path and fs modules *******************************
 const path = require('path');
 const fs = require('fs');
+// const util = require('util');
+
+const { promisify } = require('util')
+
+const readdir = promisify(require('fs').readdir)
+const stat = promisify(require('fs').stat)
+
+
+
+// const readdir = util.promisify(fs.readdir);
+// const stat = util.promisify(fs.stat);
 //joining path of directory 
 const directoryPath = path.join(__dirname, 'src/serverSide/videos');
 
-app.get('/api/videos',(req, res) => {
-    fs.readdir(directoryPath, function(err, files){
-    files = files.map(function (fileName) {
-        return {
-        name: fileName,
-        //   time: fs.statSync(directoryPath + '/' + fileName).mtime.getTime(),
-        date: Date(fs.statSync(directoryPath + '/' + fileName).mtime.getTime())
-        //   date: new Date(time)
-        };
 
-    })
-    //   .sort(function (a, b) {
-    //     return a.time - b.time; })
-    //   .map(function (v) {
-    //     return v.name; });
-    console.log("files",files)
-    res.json(files)
-    });  
-});  
+async function readDir() {
+    let files;
+    let withDateFiles
+    try {
+        
+        files = await readdir(directoryPath);
+        var mewb = files.map(async function (fileName) {
+            return await stat(directoryPath + '/' + fileName)
+            // withDateFiles = withDateFiles.mtime
+            // return  {filename: fileName } 
+            // return  {fileDate: stats.mtime, filename: newFiles } 
+        })
+        console.log("with Dates",mewb)
+        console.log("justn files",files)
 
-// Example app.get 
-// app.get('/api/videos',(req, res) => {
-//     const videos = [
-//         {id: 1, name: 'Joey and Sadie', date:   '4/1/2020'},
-//         {id: 2, name: 'Joey and Sadie2', date:   '4/2/2020'},
-//         {id: 3, name: 'Joey and Sadie3', date:   '4/3/2020'}
-//     ];
+    } catch (err) {
+        console.log(err);
+    }
+        
 
-//     res.json(videos);
-// });
+        }
+
+var result = readDir()
+console.log("files result",result)
+   
+
+
 
 const port = 5000;
 console.log("mike **************8")
