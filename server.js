@@ -30,7 +30,9 @@ async function readDir() {
         
         files = await readdir(directoryPath);
         var mewb = files.map(async function (fileName) {
-            return await stat(directoryPath + '/' + fileName)
+            withDateFiles = await stat(directoryPath + '/' + fileName)
+            console.log(withDateFiles.mtime)
+                // return (withDateFiles.mtime)
             // withDateFiles = withDateFiles.mtime
             // return  {filename: fileName } 
             // return  {fileDate: stats.mtime, filename: newFiles } 
@@ -43,12 +45,33 @@ async function readDir() {
     }
         
 
-        }
+}
 
 var result = readDir()
 console.log("files result",result)
    
+//*********************app.get stuff */
+app.get('/api/videos',(req, res) => {
+    fs.readdir(directoryPath, function(err, files){
+    files = files.map(function (fileName) {
+        return {
+        name: fileName,
+        //   time: fs.statSync(directoryPath + '/' + fileName).mtime.getTime(),
+        date: Date(fs.statSync(directoryPath + '/' + fileName).mtime.getTime())
+        //   date: new Date(time)
+        };
 
+    })
+    //   .sort(function (a, b) {
+    //     return a.time - b.time; })
+    //   .map(function (v) {
+    //     return v.name; });
+    console.log("files",files)
+    res.json(files)
+    });  
+});  
+//*********************app.get stuff */
+//*************************************** */
 
 
 const port = 5000;
