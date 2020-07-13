@@ -7,17 +7,14 @@ class Videos extends Component {
             videos: []
         }
     }
+    
+
+    
 
     componentDidMount() {
-        fetch('api/videos', {
-            mode: 'cors',
-            headers: {
-                'Access-Control-Allow-Orign':'*'
-            }
-        })
-        .then(res => res.json())
-        .then(videos => this.setState({videos}, () => console.log('videos fetch..', videos)));
-    }
+        getFiles()
+    } 
+    
         render()    {
             return (
                 <div>
@@ -32,4 +29,19 @@ class Videos extends Component {
         }
 }
 
+async function getFiles() {
+    try {
+        const response = await fetch('api/videos', {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Orign':'*'
+            }
+        })
+        const json = await response.json()
+        console.log("json",json)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
 export default Videos
