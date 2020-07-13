@@ -8,7 +8,6 @@ var myjson = []
 //requiring path and fs modules *******************************
 const path = require('path');
 const fs = require('fs');
-// const util = require('util');
 
 const { promisify } = require('util')
 
@@ -17,41 +16,41 @@ const stat = promisify(require('fs').stat)
 
 
 
-// const readdir = util.promisify(fs.readdir);
-// const stat = util.promisify(fs.stat);
 //joining path of directory 
 const directoryPath = path.join(__dirname, 'src/serverSide/videos');
 
+function getDates(files) {
+    return Promise.all(
+        files.map(async function (fileName) {
+            var dateOfFile = await stat(directoryPath + '/' + fileName)
+            return  {fileDate: dateOfFile.mtime, filename: fileName } 
+        })
+    )
+}
 
 async function readDir() {
     let files;
-    let dateOfFile
     let withDateFiles = []
     try {
         
         files = await readdir(directoryPath);
-        var mewb = files.map(async function (fileName) {
-            dateOfFile = await stat(directoryPath + '/' + fileName)
-            withDateFiles.push(dateOfFile.mtime)
-            return withDateFiles
-            // return  {fileDate: withDateFiles.mtime, filename: fileName } 
-        })
-        console.log("mewb",mewb)
+        withDateFiles = await getDates(files)
+
+        
+        
+        console.log("withDateFiles",withDateFiles)
         console.log("just files",files)
 
     } catch (err) {
         console.log(err);
     }
-    console.log("clean result",mewb.arg1)
-    console.log("withDateFiles",withDateFiles)
 
-    return mewb
+    return withDateFiles
         
 }
 
 
    
-//*********************app.get stuff */
 app.get('/api/videos',async(req, res) => {
     var result = await readDir()
     //   .sort(function (a, b) {
