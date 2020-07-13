@@ -25,53 +25,42 @@ const directoryPath = path.join(__dirname, 'src/serverSide/videos');
 
 async function readDir() {
     let files;
-    let withDateFiles
+    let dateOfFile
+    let withDateFiles = []
     try {
         
         files = await readdir(directoryPath);
         var mewb = files.map(async function (fileName) {
-            withDateFiles = await stat(directoryPath + '/' + fileName)
-            console.log(withDateFiles.mtime)
-                // return (withDateFiles.mtime)
-            // withDateFiles = withDateFiles.mtime
-            // return  {filename: fileName } 
-            // return  {fileDate: stats.mtime, filename: newFiles } 
+            dateOfFile = await stat(directoryPath + '/' + fileName)
+            withDateFiles.push(dateOfFile.mtime)
+            return withDateFiles
+            // return  {fileDate: withDateFiles.mtime, filename: fileName } 
         })
-        console.log("with Dates",mewb)
-        console.log("justn files",files)
+        console.log("mewb",mewb)
+        console.log("just files",files)
 
     } catch (err) {
         console.log(err);
     }
-        
+    console.log("clean result",mewb.arg1)
+    console.log("withDateFiles",withDateFiles)
 
+    return mewb
+        
 }
 
-var result = readDir()
-console.log("files result",result)
+
    
 //*********************app.get stuff */
-app.get('/api/videos',(req, res) => {
-    fs.readdir(directoryPath, function(err, files){
-    files = files.map(function (fileName) {
-        return {
-        name: fileName,
-        //   time: fs.statSync(directoryPath + '/' + fileName).mtime.getTime(),
-        date: Date(fs.statSync(directoryPath + '/' + fileName).mtime.getTime())
-        //   date: new Date(time)
-        };
-
-    })
+app.get('/api/videos',async(req, res) => {
+    var result = await readDir()
     //   .sort(function (a, b) {
     //     return a.time - b.time; })
     //   .map(function (v) {
     //     return v.name; });
-    console.log("files",files)
-    res.json(files)
+    console.log("json result",result)
+    res.json(result)
     });  
-});  
-//*********************app.get stuff */
-//*************************************** */
 
 
 const port = 5000;
