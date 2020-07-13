@@ -23,7 +23,7 @@ function getDates(files) {
     return Promise.all(
         files.map(async function (fileName) {
             var dateOfFile = await stat(directoryPath + '/' + fileName)
-            return  {fileDate: dateOfFile.mtime, filename: fileName } 
+            return  {fileDate: dateOfFile.mtime, fileName: fileName } 
         })
     )
 }

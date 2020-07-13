@@ -24,7 +24,7 @@ class Videos extends Component {
                     <h2>Sadie videos </h2>
                     <ul>
                         {this.state.videos.map(videos =>
-                            <li key={videos.id}>{ videos.name } {videos.date } </li>
+                            <li key={videos.id}>{ videos.fileName } {videos.fileDate } </li>
                         )}
                     </ul>
                 </div>
