@@ -1,11 +1,29 @@
 import React from "react";
 import { Column, Table } from "react-virtualized";
 import { connect } from 'react-redux'
+import  { videoTableAction } from "../actions/videoTableAction";
 
 // import Draggable from "react-draggable";
 
 const TOTAL_WIDTH = 500;
 
+async function getFiles() {
+  try {
+      const response = await fetch('api/videos', {
+          mode: 'cors',
+          headers: {
+              'Access-Control-Allow-Orign':'*'
+          }
+      })
+      const json = await response.json()
+      console.log("json - tableReducer",json)
+      videoTableAction(json);
+
+  }
+  catch (err) { 
+      console.log(err)
+  }
+}
 class VideoTable extends React.Component {
 
   state = {
@@ -15,6 +33,11 @@ class VideoTable extends React.Component {
       // description: 0.33
     }
   };
+componentDidMount(){
+  getFiles()
+  console.log("VideoTable did mount")
+}
+
 
   render() {
     console.log('Table.js props = ',this.props)
@@ -121,5 +144,9 @@ const mapStateToProps = (state) => {
     list: state.list
   }
 }
-
-export default connect(mapStateToProps)(VideoTable)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    videoTableAction: (json) => dispatch(videoTableAction(json))
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(VideoTable)

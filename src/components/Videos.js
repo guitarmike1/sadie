@@ -38,7 +38,7 @@ async function getFiles() {
             }
         })
         const json = await response.json()
-        console.log("json",json)
+        console.log("Video.js json",json)
     }
     catch (err) {
         console.log(err)

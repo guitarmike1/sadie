@@ -36,11 +36,6 @@ async function readDir() {
         files = await readdir(directoryPath);
         withDateFiles = await getDates(files)
 
-        
-        
-        console.log("withDateFiles",withDateFiles)
-        console.log("just files",files)
-
     } catch (err) {
         console.log(err);
     }

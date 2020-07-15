@@ -5,6 +5,7 @@ import tableReducer from './tableReducer'
     
     
     const rootReducer = combineReducers({
+      // postReducer,
       posts: postReducer,
       list:   tableReducer
     })
