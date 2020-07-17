@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import  { videoTableAction } from "../actions/videoTableAction";
 
 class Videos extends Component {
     constructor() {
@@ -19,8 +21,12 @@ class Videos extends Component {
             return (
                 <div>
                     <h2>Sadie videos </h2>
+                    <button onClick={this.props.videoTableAction}>Age UP</button>
+                    {/* <button onClick={this.props.onAgeUp}>Age UP</button> */}
                     <ul>
-                        {this.state.videos.map(videos =>
+                        {console.log("list",this.props.list)}
+                        {/* {this.props.list.map(videos => */}
+                        // {this.state.videos.map(videos =>
                             <li key={videos.id}>{ videos.fileName } {videos.fileDate } </li>
                         )}
                     </ul>
@@ -29,7 +35,7 @@ class Videos extends Component {
         }
 }
 
-async function getFiles() {
+export async function getFiles() {
     try {
         const response = await fetch('api/videos', {
             mode: 'cors',
@@ -44,4 +50,22 @@ async function getFiles() {
         console.log(err)
     }
 }
-export default Videos
+const mapStateToProps = (state) => {
+    console.log("Videos.js mapStP")
+  
+    return {
+      list: state.list,
+      age: state.age
+    }
+  }
+  const mapDispatchToProps = (dispatch) => {
+    console.log("Videos.js mapDtP")
+  
+    return {
+        onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
+        videoTableAction: (json) => dispatch(videoTableAction(json))
+    }
+  }
+  export default connect(mapStateToProps,mapDispatchToProps)(Videos)
+
+// export default Videos

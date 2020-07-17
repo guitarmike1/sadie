@@ -7,23 +7,7 @@ import  { videoTableAction } from "../actions/videoTableAction";
 
 const TOTAL_WIDTH = 500;
 
-async function getFiles() {
-  try {
-      const response = await fetch('api/videos', {
-          mode: 'cors',
-          headers: {
-              'Access-Control-Allow-Orign':'*'
-          }
-      })
-      const json = await response.json()
-      console.log("json - tableReducer",json)
-      videoTableAction(json);
 
-  }
-  catch (err) { 
-      console.log(err)
-  }
-}
 class VideoTable extends React.Component {
 
   state = {
@@ -33,10 +17,6 @@ class VideoTable extends React.Component {
       // description: 0.33
     }
   };
-componentDidMount(){
-  getFiles()
-  console.log("VideoTable did mount")
-}
 
 
   render() {
@@ -48,7 +28,6 @@ componentDidMount(){
     console.log('Table.js widths = ',widths)
 
     return (
-    
       <Table
         width={TOTAL_WIDTH}
         height={300}
@@ -76,6 +55,7 @@ componentDidMount(){
           label="Description"
           width={widths.description * TOTAL_WIDTH}
         /> */}
+        
       </Table>
     );
   }
@@ -140,11 +120,16 @@ componentDidMount(){
 }
 
 const mapStateToProps = (state) => {
+  console.log("Table.js mapStP")
+
   return {
-    list: state.list
+    list: state.list,
+    age: state.age
   }
 }
 const mapDispatchToProps = (dispatch) => {
+  console.log("Table.js mapDtP")
+
   return {
     videoTableAction: (json) => dispatch(videoTableAction(json))
   }

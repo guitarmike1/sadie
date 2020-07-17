@@ -4,12 +4,10 @@ import tableReducer from './tableReducer'
     
     
     
-    const rootReducer = combineReducers({
-      // postReducer,
-      posts: postReducer,
-      list:   tableReducer
-    })
-    
-    
-      
+  
+    console.log("rootReducer**************8")
+  const rootReducer = combineReducers({
+    posts: postReducer,
+    list:   tableReducer
+  })
       export default rootReducer
