@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import  { videoTableAction } from "../actions/videoTableAction";
+// import  { videoTableActionAsync } from "../actions/videoTableAction";
+import * as actionCreator from "../actions/videoTableAction"
 
 class Videos extends Component {
     constructor() {
@@ -14,15 +15,17 @@ class Videos extends Component {
     
 
     componentDidMount() {
-        getFiles()
+        // getFiles()
+        console.log("Videos - CDM")
+        this.props.onAgeUp()
     } 
     
         render()    {
             return (
                 <div>
                     <h2>Sadie videos </h2>
-                    <button onClick={this.props.videoTableAction}>Age UP</button>
-                    {/* <button onClick={this.props.onAgeUp}>Age UP</button> */}
+                    {/* <button onClick={this.props.videoTableAction}>Age UP</button> */}
+                    <button onClick={this.props.onAgeUp}>Age UP</button>
                     <ul>
                         {console.log("list",this.props.list)}
                         {/* {this.props.list.map(videos => */}
@@ -62,8 +65,10 @@ const mapStateToProps = (state) => {
     console.log("Videos.js mapDtP")
   
     return {
-        onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
-        videoTableAction: (json) => dispatch(videoTableAction(json))
+        // onAgeUp: () => dispatch(videoTableActionAsync),
+        onAgeUp: () => dispatch(actionCreator.videoTableActionAsync()),
+        // onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
+        // videoTableAction: (json) => dispatch(videoTableAction(json))
     }
   }
   export default connect(mapStateToProps,mapDispatchToProps)(Videos)
