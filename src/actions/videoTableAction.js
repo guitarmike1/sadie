@@ -1,8 +1,10 @@
-export const videoTableActionAsync = () => {
+var videoList = []
+
+export const videoTableActionAsync = (json) => {
     console.log("videoTableActionAsync")
     return {
       type: "VIDEO_TABLE",
-      value:  1
+      value:  json
     };
   };
 
@@ -13,15 +15,15 @@ export const videoTableActionAsync = () => {
 
 
   export const videoTableAction = () => {
-    console.log("vTA - 1")
+    console.log("vTA - 1",videoList)
     return dispatch => {
-      // const json = getFiles()
-      const json = 1
-    console.log("vTA - 2")
+      const json = getFiles()
+    console.log("vTA - 2",videoList)
     setTimeout(() => {
-    console.log("vTA - 3")
+    console.log("vTA - 3",videoList)
+    console.log("videoList array = ",videoList)
 
-        dispatch(videoTableActionAsync(json));
+        dispatch(videoTableActionAsync(videoList));
       }, 500);
     };
   };
@@ -36,6 +38,7 @@ export const videoTableActionAsync = () => {
         })
         const json = await response.json()
         console.log("Video.js json",json)
+        videoList = json
         return json
     }
     catch (err) {

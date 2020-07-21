@@ -18,8 +18,7 @@ const tableReducer = (state = initState, action) => {
     switch(action.type){
       case "VIDEO_TABLE":
         return{
-          ...state,
-          list: list
+          list: action.value
         }
         
 

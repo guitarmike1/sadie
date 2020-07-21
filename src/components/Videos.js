@@ -65,9 +65,7 @@ const mapStateToProps = (state) => {
     console.log("Videos.js mapDtP")
   
     return {
-        // onAgeUp: () => dispatch(videoTableActionAsync),
-        onAgeUp: () => dispatch(actionCreator.videoTableActionAsync()),
-        // onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
+        onAgeUp: () => dispatch(actionCreator.videoTableAction()),
         // videoTableAction: (json) => dispatch(videoTableAction(json))
     }
   }
