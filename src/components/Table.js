@@ -1,7 +1,8 @@
 import React from "react";
 import { Column, Table } from "react-virtualized";
 import { connect } from 'react-redux'
-import  { videoTableAction } from "../actions/videoTableAction";
+// import  { videoTableAction } from "../actions/videoTableAction";
+import * as actionCreator from "../actions/videoTableAction"
 
 // import Draggable from "react-draggable";
 
@@ -18,12 +19,18 @@ class VideoTable extends React.Component {
     }
   };
 
+  componentDidMount() {
+    // getFiles()
+    console.log("Videos - CDM")
+    this.props.videoTableAction()
+} 
 
   render() {
     console.log('Table.js props = ',this.props)
     // console.log('TAble list = ',list)
     // const { list } = list;
     const { list } = this.props;
+    console.log("Table list = ",list.length)
     const { widths } = this.state;
     console.log('Table.js widths = ',widths)
 
@@ -40,8 +47,8 @@ class VideoTable extends React.Component {
       
         <Column
           headerRenderer={this.headerRenderer}
-          dataKey="name"
-          label="Name"
+          dataKey="fileName"
+          label="fileName"
           width={widths.name * TOTAL_WIDTH}
         />
         {/* <Column
@@ -131,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
   console.log("Table.js mapDtP")
 
   return {
-    videoTableAction: (json) => dispatch(videoTableAction(json))
+    videoTableAction: (json) => dispatch(actionCreator.videoTableAction(json))
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(VideoTable)
