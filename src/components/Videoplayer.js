@@ -13,6 +13,13 @@ import ReactPlayer from "react-player";
 // import ReactPlayer from '../index'
 import Duration from '../Duration'
 
+import VideoTable from './Table'
+import * as actionCreator from "../actions/videoSelectAction"
+import { connect } from 'react-redux'
+
+
+
+
 const MULTIPLE_SOURCES = [
   { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4' },
   { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogv' },
@@ -158,7 +165,7 @@ class Videoplayer extends Component {
     return (
       <div className='app'>
         <section className='section'>
-          <h1>ReactPlayer Demo</h1>
+          <h1>ReactPlayer Critter Videos</h1>
           <div className='player-wrapper'>
             <ReactPlayer
               ref={this.ref}
@@ -167,6 +174,7 @@ class Videoplayer extends Component {
               height='100%'
               // url={url}
               url = 'videos/sadieJoeySnow.mp4'
+              // url = "videos/" + this.props.videoPath
               pip={pip}
               playing={playing}
               controls={controls}
@@ -415,6 +423,12 @@ class Videoplayer extends Component {
               </tr>
             </tbody>
           </table>
+
+          <h2>Video Selector Table</h2>
+          <VideoTable/>
+          <table>
+            
+          </table>
         </section>
         <footer className='footer'>
           Version <strong>{version}</strong>
@@ -428,5 +442,22 @@ class Videoplayer extends Component {
   }
 }
 
+
+const mapStateToProps = (state) => {
+  console.log("Videos.js mapStP")
+
+  return {
+    videoPath: state.videoPath
+  }
+}
+// const mapDispatchToProps = (dispatch) => {
+//   console.log("Videoplayer.js mapDtP")
+
+//   return {
+//       videoSelectProperty: () => dispatch(actionCreator.videoSelectAction()),
+//       // videoTableAction: (json) => dispatch(videoTableAction(json))
+//   }
+// }
+export default connect(mapStateToProps)(Videoplayer)
 // export default hot(module)(App)
-export default Videoplayer
+// export default Videoplayer

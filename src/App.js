@@ -25,7 +25,7 @@ class App extends Component {
           <Navbar />
           <Switch>
             {/* <Route exact path='/' component={Videos}/> */}
-            <Route exact path='/' component={VideoTable} />
+            {/* <Route exact path='/' component={VideoTable} /> */}
             <Route exact path='/' component={Videoplayer}/>
             {/* <Route exact path='/' component={Home}/> */}
             <Route path='/about' component={About} />

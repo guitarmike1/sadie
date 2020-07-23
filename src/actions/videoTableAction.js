@@ -8,9 +8,9 @@ export const videoTableActionAsync = (json) => {
     };
   };
 
-  export const ageUpAsnc = val => {
-    return { type: "AGE_UP", value: val };
-  };
+  // export const ageUpAsnc = val => {
+  //   return { type: "AGE_UP", value: val };
+  // };
 
 
 

@@ -17,7 +17,7 @@ class Videos extends Component {
     componentDidMount() {
         // getFiles()
         console.log("Videos - CDM")
-        this.props.onAgeUp()
+        // this.props.videoTableActionProperty()
     } 
     
         render()    {
@@ -25,7 +25,7 @@ class Videos extends Component {
                 <div>
                     <h2>Sadie videos </h2>
                     {/* <button onClick={this.props.videoTableAction}>Age UP</button> */}
-                    <button onClick={this.props.onAgeUp}>Age UP</button>
+                    {/* <button onClick={this.props.videoTableActionProperty}>Age UP</button> */}
                     <ul>
                         {console.log("list",this.props.list)}
                         {/* {this.props.list.map(videos => */}
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
     console.log("Videos.js mapDtP")
   
     return {
-        onAgeUp: () => dispatch(actionCreator.videoTableAction()),
+        videoTableActionProperty: () => dispatch(actionCreator.videoTableAction()),
         // videoTableAction: (json) => dispatch(videoTableAction(json))
     }
   }

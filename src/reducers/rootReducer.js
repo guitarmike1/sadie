@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import postReducer from './postReducer'
 import tableReducer from './tableReducer'
+import videoSelectReducer from './videoReducer'
     
     
     
@@ -8,6 +9,7 @@ import tableReducer from './tableReducer'
     console.log("rootReducer**************8")
   const rootReducer = combineReducers({
     posts: postReducer,
-    list: tableReducer
+    list: tableReducer,
+    videoPath:  videoSelectReducer
   })
       export default rootReducer

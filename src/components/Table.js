@@ -2,7 +2,8 @@ import React from "react";
 import { Column, Table } from "react-virtualized";
 import { connect } from 'react-redux'
 // import  { videoTableAction } from "../actions/videoTableAction";
-import * as actionCreator from "../actions/videoTableAction"
+import { videoTableAction } from "../actions/videoTableAction"
+import  { videoSelectAction } from "../actions/videoSelectAction"
 
 // import Draggable from "react-draggable";
 
@@ -21,9 +22,21 @@ class VideoTable extends React.Component {
 
   componentDidMount() {
     // getFiles()
-    console.log("Videos - CDM")
-    this.props.videoTableAction()
+  this.logArgs = this.logArgs.bind(this)
+  console.log("Videos - CDM")
+    this.props.videoTableActionProperty()
+    // this.props.videoSelectActionProperty()
 } 
+logArgs(event,index){
+  console.log( 'here is the event:',event,
+               'the index:',index,
+              //  'the object:',this.state.bpTableData[index]
+  );
+  // const result = (event.rowData.fileName);
+
+  this.props.videoSelectActionProperty(event.rowData.fileName)
+this.forceUpdate()
+}
 
   render() {
     console.log('Table.js props = ',this.props)
@@ -33,6 +46,9 @@ class VideoTable extends React.Component {
     console.log("Table list = ",list.length)
     const { widths } = this.state;
     console.log('Table.js widths = ',widths)
+    // this.props.videoSelectActionProperty(1)
+
+    
 
     return (
       <Table
@@ -65,17 +81,15 @@ class VideoTable extends React.Component {
         
       </Table>
     );
+    
   }
 
-
-  logArgs(event,index){
-    console.log( 'here is the event:',event,
-                 'the index:',index,
-                //  'the object:',this.state.bpTableData[index]
-    );
-  }
 
   
+
+  
+
+
   headerRenderer = ({
     columnData,
     dataKey,
@@ -126,19 +140,28 @@ class VideoTable extends React.Component {
     });
 }
 
+// const test = (result) =>  {
+//   videoSelectAction(result)
+//   console.log("test *********************",result)
+// }
+
 const mapStateToProps = (state) => {
   console.log("Table.js mapStP")
 
   return {
     list: state.list,
-    age: state.age
+    age: state.age,
+    videoPath: state.videoPath
   }
 }
 const mapDispatchToProps = (dispatch) => {
   console.log("Table.js mapDtP")
 
   return {
-    videoTableAction: (json) => dispatch(actionCreator.videoTableAction(json))
+    // videoTableActionProperty: (json) => dispatch(videoSelectAction(json)),
+    videoTableActionProperty: (json) => dispatch(videoTableAction(json)),
+    videoSelectActionProperty: (event) => dispatch(videoSelectAction(event))
+
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(VideoTable)
