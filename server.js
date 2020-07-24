@@ -17,7 +17,7 @@ const stat = promisify(require('fs').stat)
 
 
 //joining path of directory 
-const directoryPath = path.join(__dirname, 'src/serverSide/videos');
+const directoryPath = path.join(__dirname, 'public/videos');
 
 function getDates(files) {
     return Promise.all(
