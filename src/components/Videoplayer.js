@@ -174,7 +174,12 @@ class Videoplayer extends Component {
               height='100%'
               // url={url}
               // url = 'videos/sadieJoeySnow.mp4'
-              url = {"http://localhost:3000/videos/" + this.props.videoPath}
+              // url = {"http://localhost:5000~/creations/sadie/src/serverSide/videos/" + this.props.videoPath}
+              // url = {"http://localhost:3000/videos/" + this.props.videoPath}
+              // url = "https://www.youtube.com/watch?v=oUFJJNQGwhk"
+              // url = {"http://10.0.0.46:5000/test"}
+              url = {"http://10.0.0.46:5000/test/" + this.props.videoPath}
+              // url = "http://localhost:5000/test"
               pip={pip}
               playing={playing}
               controls={controls}

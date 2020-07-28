@@ -17,7 +17,8 @@ const stat = promisify(require('fs').stat)
 
 
 //joining path of directory 
-const directoryPath = path.join(__dirname, 'public/videos');
+const directoryPath = path.join(__dirname, 'src/serverSide/videos');
+// const directoryPath = path.join(__dirname, 'public/videos');
 
 function getDates(files) {
     return Promise.all(
@@ -56,6 +57,15 @@ app.get('/api/videos',async(req, res) => {
     res.json(result)
     });  
 
+
+    app.get('/test/:path',(req, res) => {
+        console.log("video",req.params)
+
+        res.setHeader("content-type", "some/type");
+        res.setHeader("Access_Control-Allow_Origin","*");
+        fs.createReadStream("./src/serverSide/videos/" + req.params.path ).pipe(res);
+        // res.end(result)
+        });  
 
 const port = 5000;
 console.log("mike **************8")
