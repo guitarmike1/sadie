@@ -48,22 +48,29 @@ async function readDir() {
 
    
 app.get('/api/videos',async(req, res) => {
-    var result = await readDir()
-    //   .sort(function (a, b) {
-    //     return a.time - b.time; })
-    //   .map(function (v) {
-    //     return v.name; });
-    console.log("json result",result)
-    res.json(result)
-    });  
+    try {
+
+        var result = await readDir()
+        //   .sort(function (a, b) {
+        //     return a.time - b.time; })
+        const nameSorted = result.sort((a, b) => a.fileName.localeCompare(b.fileName))
+        const timeSorted = result.sort((a, b) => (a.fileDate) - (b.fileDate))
+        console.log("v.name",timeSorted)
+        console.log("json result",result)
+        res.json(result)
+    }
+    catch (err) {
+        console.log(err);
+    }
+});  
 
 
-    app.get('/test/:path',(req, res) => {
+    app.get('/test/:videoName',(req, res) => {
         console.log("video",req.params)
 
         res.setHeader("content-type", "some/type");
         res.setHeader("Access_Control-Allow_Origin","*");
-        fs.createReadStream("./src/serverSide/videos/" + req.params.path ).pipe(res);
+        fs.createReadStream("./src/serverSide/videos/" + req.params.videoName ).pipe(res);
         // res.end(result)
         });  
 
