@@ -6,21 +6,21 @@ import { videoTableAction } from "../actions/videoTableAction"
 import  { videoSelectAction } from "../actions/videoSelectAction"
 import "../css/index.css";
 import _ from "lodash";
-import "../css/styles.css";
 import "../css/App.css";
+import 'react-virtualized/styles.css'
 
 import Draggable from "react-draggable";
 
-const TOTAL_WIDTH = 300;
+const TOTAL_WIDTH = 500;
 
 
 class VideoTable extends React.Component {
 
   state = {
     widths: {
-      name: 0.3,
-      location: 0.3,
-      description: 0.33
+      name: 0.5,
+      location: 0.5
+      // description: 0.33
     }
   };
 
@@ -90,12 +90,12 @@ logArgs(event,index){
           // width = "300"
           width={widths.location * TOTAL_WIDTH}
         />
-        <Column
+        {/* <Column
           dataKey="description"
           label="Description"
           // width= "300"
           width={widths.description * TOTAL_WIDTH}
-        />
+        /> */}
         
       </Table>
       </div>
