@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from 'react';
 import { Column, Table, AutoSizer } from "react-virtualized";
 import { connect } from 'react-redux'
 // import  { videoTableAction } from "../actions/videoTableAction";
@@ -11,16 +11,16 @@ import "../css/App.css";
 
 import Draggable from "react-draggable";
 
-const TOTAL_WIDTH = 500;
+const TOTAL_WIDTH = 300;
 
 
 class VideoTable extends React.Component {
 
   state = {
     widths: {
-      name: 0.5,
-      location: 0.5
-      // description: 0.33
+      name: 0.3,
+      location: 0.3,
+      description: 0.33
     }
   };
 
@@ -46,11 +46,24 @@ logArgs(event,index){
     console.log("Table list = ",list.length)
     const { widths } = this.state;
     console.log('Table.js widths = ',widths)
+    console.log("TOTAL_WIDTH = ",TOTAL_WIDTH)
 
     
 
     return (
-      <Table
+<Fragment>
+
+      <div className="container">
+        <h5 className="light-blue darken-1">Be yourself, everyone else is already taken</h5>
+        <h5 className="orange lighten-4">We are all in the gutter, but some of us are looking at the stars</h5>
+        <h5 class="purple darken-3 white-text">To live is the rarest thing in the world. Most people exist, that is all</h5>
+        <h5 class="teal darken-2 yellow-text text-lighten-3">Experience is simply the name we give our mistakes</h5>
+        <h5 class="yellow lighten-3 purple-text text-darken-2">Always forgive your enemies - nothing annoys them so much</h5>
+      </div>
+
+
+      <div className="container">
+      <Table columns = "3"
       
         width={TOTAL_WIDTH}
         height={300}
@@ -61,78 +74,85 @@ logArgs(event,index){
         onRowClick={this.logArgs}
       >
       
-        <Column
-          // headerRenderer={this.headerRenderer}
+        <Column  className="orange lighten-4"
+          headerRenderer={this.headerRenderer}
           dataKey="fileName"
           label="fileName"
+          // width = "300"
           
-          // width={widths.name * TOTAL_WIDTH}
+          width={widths.name * TOTAL_WIDTH}
         />
-        <Column
-          // headerRenderer={this.headerRenderer}
+
+        <Column className="purple darken-3 white-text"
+          headerRenderer={this.headerRenderer}
           dataKey="fileDate"
           label="fileDate"
-          width = {300}
-          // width={widths.location * TOTAL_WIDTH}
+          // width = "300"
+          width={widths.location * TOTAL_WIDTH}
         />
         <Column
           dataKey="description"
           label="Description"
+          // width= "300"
           width={widths.description * TOTAL_WIDTH}
         />
         
       </Table>
+      </div>
+
+    </Fragment>
+
     );
   }
 
-  // headerRenderer = ({
-  //   columnData,
-  //   dataKey,
-  //   disableSort,
-  //   label,
-  //   sortBy,
-  //   sortDirection
-  // }) => {
-  //   return (
-  //     <React.Fragment key={dataKey}>
-  //       <div className="ReactVirtualized__Table__headerTruncatedText">
-  //         {label}
-  //       </div>
-  //       <Draggable
-  //         axis="x"
-  //         defaultClassName="DragHandle"
-  //         defaultClassNameDragging="DragHandleActive"
-  //         onDrag={(event, { deltaX }) =>
-  //           this.resizeRow({
-  //             dataKey,
-  //             deltaX
-  //           })
-  //         }
-  //         position={{ x: 0 }}
-  //         zIndex={999}
-  //       >
-  //         <span className="DragHandleIcon">⋮</span>
-  //       </Draggable>
-  //     </React.Fragment>
-  //   );
-  // };
+  headerRenderer = ({
+    columnData,
+    dataKey,
+    disableSort,
+    label,
+    sortBy,
+    sortDirection
+  }) => {
+    return (
+      <React.Fragment key={dataKey}>
+        <div className="ReactVirtualized__Table__headerTruncatedText">
+          {label}
+        </div>
+        <Draggable
+          axis="x"
+          defaultClassName="DragHandle"
+          defaultClassNameDragging="DragHandleActive"
+          onDrag={(event, { deltaX }) =>
+            this.resizeRow({
+              dataKey,
+              deltaX
+            })
+          }
+          position={{ x: 0 }}
+          zIndex={999}
+        >
+          <span className="DragHandleIcon">⋮</span>
+        </Draggable>
+      </React.Fragment>
+    );
+  };
 
-  // resizeRow = ({ dataKey, deltaX }) =>
-  //   this.setState(prevState => {
-  //     const prevWidths = prevState.widths;
-  //     const percentDelta = deltaX / TOTAL_WIDTH;
+  resizeRow = ({ dataKey, deltaX }) =>
+    this.setState(prevState => {
+      const prevWidths = prevState.widths;
+      const percentDelta = deltaX / TOTAL_WIDTH;
 
-  //     // This is me being lazy :)
-  //     const nextDataKey = dataKey === "name" ? "location" : "description";
+      // This is me being lazy :)
+      const nextDataKey = dataKey === "name" ? "location" : "description";
 
-  //     return {
-  //       widths: {
-  //         ...prevWidths,
-  //         [dataKey]: prevWidths[dataKey] + percentDelta,
-  //         [nextDataKey]: prevWidths[nextDataKey] - percentDelta
-  //       }
-  //     };
-  //   });
+      return {
+        widths: {
+          ...prevWidths,
+          [dataKey]: prevWidths[dataKey] + percentDelta,
+          [nextDataKey]: prevWidths[nextDataKey] - percentDelta
+        }
+      };
+    });
 }
 
 
