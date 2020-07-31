@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 // import  { videoTableAction } from "../actions/videoTableAction";
 import { videoTableAction } from "../actions/videoTableAction"
 import  { videoSelectAction } from "../actions/videoSelectAction"
-import "../css/index.css";
-import _ from "lodash";
-import "../css/App.css";
+// import "../css/index.css";
+// import _ from "lodash";
+// import "../css/App.css";
 import 'react-virtualized/styles.css'
 
 import Draggable from "react-draggable";
@@ -21,7 +21,7 @@ class VideoTable extends React.Component {
       name: 0.5,
       location: 0.5
       // description: 0.33
-    }
+    }    
   };
 
   componentDidMount() {
@@ -31,6 +31,7 @@ class VideoTable extends React.Component {
     this.props.videoTableActionProperty()
     // this.props.videoSelectActionProperty()
 } 
+
 logArgs(event,index){
   console.log( 'here is the event:',event,
                'the index:',index,
@@ -45,8 +46,6 @@ logArgs(event,index){
     const { list } = this.props;
     console.log("Table list = ",list.length)
     const { widths } = this.state;
-    console.log('Table.js widths = ',widths)
-    console.log("TOTAL_WIDTH = ",TOTAL_WIDTH)
 
     
 
@@ -54,24 +53,26 @@ logArgs(event,index){
 <Fragment>
 
       <div className="container">
-        <h5 className="light-blue darken-1">Be yourself, everyone else is already taken</h5>
+        {/* <h5 className="light-blue darken-1">Be yourself, everyone else is already taken</h5>
         <h5 className="orange lighten-4">We are all in the gutter, but some of us are looking at the stars</h5>
         <h5 class="purple darken-3 white-text">To live is the rarest thing in the world. Most people exist, that is all</h5>
         <h5 class="teal darken-2 yellow-text text-lighten-3">Experience is simply the name we give our mistakes</h5>
-        <h5 class="yellow lighten-3 purple-text text-darken-2">Always forgive your enemies - nothing annoys them so much</h5>
+        <h5 class="yellow lighten-3 purple-text text-darken-2">Always forgive your enemies - nothing annoys them so much</h5> */}
       </div>
 
 
       <div className="container">
-      <Table columns = "3"
+      <Table
       
         width={TOTAL_WIDTH}
-        height={300}
+        height={200}
         headerHeight={20}
         rowHeight={30}
         rowCount={list.length}
         rowGetter={({ index }) => list[index]}
         onRowClick={this.logArgs}
+        sortDirection= "ASC" //Does not work
+        sortBy= "fileName" //Does not work
       >
       
         <Column  className="orange lighten-4"
