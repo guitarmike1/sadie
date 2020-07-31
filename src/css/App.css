@@ -17,13 +17,15 @@ $gutter-width: 20px;
 }
 
 .player-wrapper {
-  width: 480px;
-  height: 270px;
+  /* width: 480px;
+  height: 270px; */
+  width: 960px;
+  height: 540px;
 }
 
 .react-player {
   margin-bottom: 10px;
-  background: rgba(0, 0, 0, .1);
+  background: rgba(14, 13, 13, 0.945);
 }
 
 .faded {

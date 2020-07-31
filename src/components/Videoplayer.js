@@ -31,7 +31,7 @@ class Videoplayer extends Component {
     url: null,
     pip: false,
     playing: true,
-    controls: false,
+    controls: true,
     light: false,
     volume: 0.8,
     muted: false,
@@ -39,7 +39,7 @@ class Videoplayer extends Component {
     loaded: 0,
     duration: 0,
     playbackRate: 1.0,
-    loop: false
+    loop: true
   }
 
   load = url => {
@@ -237,13 +237,13 @@ class Videoplayer extends Component {
                   />
                 </td>
               </tr>
-              <tr>
+              {/* <tr>
                 <th>Volume</th>
                 <td>
                   <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
                 </td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th>
                   <label htmlFor='controls'>Controls</label>
                 </th>
@@ -251,39 +251,39 @@ class Videoplayer extends Component {
                   <input id='controls' type='checkbox' checked={controls} onChange={this.handleToggleControls} />
                   <em>&nbsp; Requires player reload</em>
                 </td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th>
                   <label htmlFor='muted'>Muted</label>
                 </th>
                 <td>
                   <input id='muted' type='checkbox' checked={muted} onChange={this.handleToggleMuted} />
                 </td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th>
                   <label htmlFor='loop'>Loop</label>
                 </th>
                 <td>
                   <input id='loop' type='checkbox' checked={loop} onChange={this.handleToggleLoop} />
                 </td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th>
                   <label htmlFor='light'>Light mode</label>
                 </th>
                 <td>
                   <input id='light' type='checkbox' checked={light} onChange={this.handleToggleLight} />
                 </td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th>Played</th>
                 <td><progress max={1} value={played} /></td>
               </tr>
               <tr>
                 <th>Loaded</th>
                 <td><progress max={1} value={loaded} /></td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </section>
@@ -388,7 +388,7 @@ class Videoplayer extends Component {
           </table> */}
           
 
-          <h2>State</h2>
+          {/* <h2>State</h2>
 
           <table>
             <tbody>
@@ -427,9 +427,9 @@ class Videoplayer extends Component {
                 <td><Duration seconds={duration * (1 - played)} /></td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
 
-          <h2>Video Selector Table</h2>
+          <h1 className="center  red darken-3 white-text">Video Selector Table</h1>
           <VideoTable/>
           <table>
             

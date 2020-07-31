@@ -51,11 +51,10 @@ app.get('/api/videos',async(req, res) => {
     try {
 
         var result = await readDir()
-        //   .sort(function (a, b) {
-        //     return a.time - b.time; })
-        const nameSorted = result.sort((a, b) => a.fileName.localeCompare(b.fileName))
+        
+        // const nameSorted = result.sort((a, b) => a.fileName.localeCompare(b.fileName))
         const timeSorted = result.sort((a, b) => (a.fileDate) - (b.fileDate))
-        console.log("v.name",timeSorted)
+        // console.log("v.name",timeSorted)
         console.log("json result",result)
         res.json(result)
     }
